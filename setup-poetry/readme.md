@@ -3,8 +3,8 @@ GitHub Actions for Python projects using poetry
 
 ## Getting started
 
-### Breaking changes for v2
-With this action you can easily install 
+### Description
+With this action you can easily install python and poetry 
 
 ### Create your workflow
 ```yaml
