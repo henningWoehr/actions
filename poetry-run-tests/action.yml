@@ -14,13 +14,14 @@ inputs:
 outputs:
   project-version:
     description: Current project version of pyproject.toml
-    value: ${{ steps.get-project-number.outputs.project-number }}
+    value: ${{ steps.setup-poetry.outputs.project-number }}
 
 runs:
   using: "composite"
 
   steps:
         - name: Setup poetry
+          id: setup-poetry
           uses: henningwoehr/actions/setup-poetry@main
           with:
             python-version: ${{ inputs.python-version }}
@@ -32,8 +33,4 @@ runs:
 
         - name: Test with pytest in poetry
           run: poetry run pytest
-          shell: bash
-
-        - id: get-project-number
-          run: echo "::set-output name=project-version::$(poetry version -s)"
           shell: bash
