@@ -22,7 +22,7 @@ runs:
       run: |
         strip ./build/x86_64-unknown-linux-gnu/release/exe/encryptiontoolcli
         mkdir built_file
-        cd ./build/x86_64-unknown-linux-gnu/release/exe
+        mv ./build/x86_64-unknown-linux-gnu/release/exe/* built_file/
         zip built_file/linux_gnu_x64_exe.zip ./*
       shell: bash
 
