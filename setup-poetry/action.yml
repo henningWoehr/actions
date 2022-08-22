@@ -28,6 +28,7 @@ runs:
           run: pip install poetry==${{ inputs.poetry-version }}
           shell: bash
 
-        - id: get-project-number
+        - name: Get project number
+          id: get-project-number
           run: echo "::set-output name=project-version::$(poetry version -s)"
           shell: bash

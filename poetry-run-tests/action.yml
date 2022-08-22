@@ -34,3 +34,7 @@ runs:
         - name: Test with pytest in poetry
           run: poetry run pytest
           shell: bash
+
+        - name: Test project number
+          run: echo ${{ steps.setup-poetry.outputs.project-number }}
+          shell: bash
