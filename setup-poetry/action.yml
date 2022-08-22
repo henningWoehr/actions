@@ -10,6 +10,10 @@ inputs:
     description: "Version of python to install"
     required: false
     default: "3.10"
+  install-dependencies:
+    description: "Install project dependencies if true"
+    required: false
+    default: 'false'
 
 outputs:
   project-version:
@@ -26,6 +30,11 @@ runs:
 
         - name: Install poetry
           run: pip install poetry==${{ inputs.poetry-version }}
+          shell: bash
+
+        - name: Install poetry dependencies
+          if: ${{ inputs.install-dependencies }} == 'true'
+          run: poetry install
           shell: bash
 
         - id: get-project-version
