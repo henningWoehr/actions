@@ -26,10 +26,7 @@ runs:
           with:
             python-version: ${{ inputs.python-version }}
             poetry-version: ${{ inputs.poetry-version }}
-
-        - name: Install poetry dependencies
-          run: poetry install
-          shell: bash
+            install-dependencies: true
 
         - name: Test with pytest in poetry
           run: poetry run pytest
