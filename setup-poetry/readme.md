@@ -4,7 +4,7 @@ GitHub Actions for Python projects using poetry
 ## Getting started
 
 ### Description
-With this action you can easily install python and poetry 
+With this action you can easily install python and poetry and optionally the dependencies for the project
 
 ### Create your workflow
 ```yaml
@@ -23,6 +23,7 @@ jobs:
           with:
             python-version: "3.10"      # optional (default: 3.10)
             poetry-version: "1.1.14"    # optional (default: 1.1.14)
+            install-dependencies: true  # optional (default: false)
 
       - name: Project Version
         run: echo ${{ steps.setup-poetry.outputs.project-version }}
