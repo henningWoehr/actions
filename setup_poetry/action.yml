@@ -1,0 +1,30 @@
+name: "Setup Python and Poetry"
+description: "Setups Python, Poetry and sets env.project_version"
+
+inputs:
+  poetry-version:
+    description: "Version of poetry to install"
+    required: false
+    default: "1.1.14"
+  python-version:
+    description: "Version of python to install"
+    required: false
+    default: "1.10"
+
+runs:
+  using: "composite"
+  steps:
+        - uses: actions/checkout@v2
+        - name: Install Python
+          uses: actions/setup-python@v2
+          with:
+            python-version: ${{ inputs.python-version }}
+
+        - name: Install poetry
+          run: pip install poetry==${{ inputs.poetry-version }}
+          shell: bash
+
+        # - name: Install Poetry
+        #   uses: abatilo/actions-poetry@v2.0.0
+        #   with:
+        #     poetry-version: ${{ inputs.poetry-version }}
