@@ -14,7 +14,7 @@ inputs:
 outputs:
   project-version:
     description: Current project version of pyproject.toml
-    value: ${{ steps.get-project-number.outputs.project-number }}
+    value: ${{ steps.get-project-version.outputs.project-version }}
 
 runs:
   using: "composite"
@@ -28,7 +28,6 @@ runs:
           run: pip install poetry==${{ inputs.poetry-version }}
           shell: bash
 
-        - name: Get project number
-          id: get-project-number
+        - id: get-project-version
           run: echo "::set-output name=project-version::$(poetry version -s)"
           shell: bash
