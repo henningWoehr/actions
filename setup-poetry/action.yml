@@ -33,7 +33,7 @@ runs:
           shell: bash
 
         - name: Install poetry dependencies
-          if: ${{ inputs.install-dependencies }} == 'true'
+          if: inputs.install-dependencies == 'true'
           run: poetry install
           shell: bash
 
