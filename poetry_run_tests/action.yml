@@ -15,22 +15,15 @@ runs:
   using: "composite"
   steps:
         - name: Setup poetry
-          uses: Henning-Woehrmann/setup-poetry
-          # with:
-          #   python-version: "1.10"
-          #   poetry-version: "1.1.14"
+          uses: henningwoehr/actions/setup-poetry@main
+          with:
+            python-version: ${{ inputs.python-version }}
+            poetry-version: ${{ inputs.poetry-version }}
 
+        - name: Install poetry dependencies
+          run: poetry install
+          shell: bash
 
-        # - name: Install Python
-        #   uses: actions/setup-python@v2
-        #   with:
-        #     python-version: ${{ inputs.python-version }}
-
-        # - name: Install poetry
-        #   run: pip install poetry==${{ inputs.poetry-version }}
-        #   shell: bash
-
-        # - name: Install Poetry
-        #   uses: abatilo/actions-poetry@v2.0.0
-        #   with:
-        #     poetry-version: ${{ inputs.poetry-version }}
+        - name: Test with pytest in poetry
+          run: poetry run pytest
+          shell: bash
