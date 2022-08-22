@@ -1,0 +1,33 @@
+name: "pyoxidizer-build-linux-gnu-x64"
+description: "Build project with pyoxidizer on linux gnu x64"
+
+inputs:
+  artifact-name:
+    description: "Name of the artifact, where the built file should be uploaded"
+    required: true
+  
+runs:
+  using: "composite"
+  steps:  
+
+    - name: Install pyoxidizer
+      run: pip install pyoxidizer
+      shell: bash
+
+    - name: Build executable with pyoxidizer
+      run: pyoxidizer build exe --release 
+      shell: bash
+
+    - name: Strip and zip executable
+      run: |
+        strip ./build/x86_64-unknown-linux-gnu/release/exe/encryptiontoolcli
+        mkdir built_file
+        cd ./build/x86_64-unknown-linux-gnu/release/exe
+        zip built_file/linux_gnu_x64_exe.zip ./*
+      shell: bash
+
+    - name: Upload built file
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: built_file/
