@@ -9,7 +9,7 @@ inputs:
   python-version:
     description: "Version of python to install"
     required: false
-    default: "1.10"
+    default: "3.10"
 
 runs:
   using: "composite"
