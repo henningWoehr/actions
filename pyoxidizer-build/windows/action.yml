@@ -84,7 +84,7 @@ runs:
     - run: mkdir built_file
       shell: bash
 
-    - run: mkdir build/test/release/msi_installer/staged_files/
+    - run: mkdir build/test/release/msi_installer/staged_files
       shell: bash
 
     - run: echo "" > build/test/release/msi_installer/test.msi 
