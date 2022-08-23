@@ -1,5 +1,5 @@
 name: "pyoxidizer-build-linux-gnu-x64"
-description: "Build project with pyoxidizer on linux gnu x64"
+description: "Build project with pyoxidizer on linux gnu x64. Code has to be checked out."
 
 inputs:
   artifact-name:
