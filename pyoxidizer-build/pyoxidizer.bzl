@@ -190,7 +190,7 @@ def make_exe():
     # python_config.write_modules_directory_env = "/tmp/oxidized/loaded_modules"
 
     # Evaluate a string as Python code when the interpreter starts.
-    python_config.run_command = "from encryptiontoolcli.main import main; main()"
+    python_config.run_command = VARS.get("run_command", "<code>")
 
     # Run a Python module as __main__ when the interpreter starts.
     # python_config.run_module = "<module>"
@@ -202,7 +202,7 @@ def make_exe():
     # resources, and other options. The returned object represents the
     # standalone executable that will be built.
     exe = dist.to_python_executable(
-        name="encryptiontoolcli",
+        name=VARS.get("app_name", "default_name"),
 
         # If no argument passed, the default `PythonPackagingPolicy` for the
         # distribution is used.
@@ -238,14 +238,14 @@ def make_exe():
     # collected files inside Python wheels. `add_python_resources()` adds these
     # objects to the binary, with a load location as defined by the packaging
     # policy's resource location attributes.
-    # exe.add_python_resources(exe.pip_download(["pyflakes==2.2.0"]))
+    #exe.add_python_resources(exe.pip_download(["pyflakes==2.2.0"]))
 
     # Invoke `pip install` with our Python distribution to install a single package.
     # `pip_install()` returns objects representing installed files.
     # `add_python_resources()` adds these objects to the binary, with a load
     # location as defined by the packaging policy's resource location
     # attributes.
-    # exe.add_python_resources(exe.pip_install(["appdirs"]))
+    exe.add_python_resources(exe.pip_install([CWD]))
 
     # Invoke `pip install` using a requirements file and add the collected resources
     # to our binary.
@@ -255,10 +255,10 @@ def make_exe():
     # Read Python files from a local directory and add them to our embedded
     # context, taking just the resources belonging to the `foo` and `bar`
     # Python packages.
-    exe.add_python_resources(exe.read_package_root(
-        path=CWD,
-        packages=["encryptiontoolcli"],
-    ))
+    #exe.add_python_resources(exe.read_package_root(
+    #    path="/src/mypackage",
+    #    packages=["foo", "bar"],
+    #))
 
     # Discover Python files from a virtualenv and add them to our embedded
     # context.
@@ -290,13 +290,13 @@ def make_msi(exe):
     # .msi installer when it is built.
     return exe.to_wix_msi_builder(
         # Simple identifier of your app.
-        "encryptiontoolcli",
+        VARS.get("app_name", "app_name"),
         # The name of your application.
-        "Encryption Tool CLI",
+        VARS.get("display_name", "display_name"),
         # The version of your application.
-        "0.1.0",
+        VARS.get("app_version", "1.0"),
         # The author/manufacturer of your application.
-        "Schulz Systemtechnik GmbH"
+        VARS.get("app_author", "Author")
     )
 
 
