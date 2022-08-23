@@ -96,6 +96,12 @@ runs:
         Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
       shell: powershell
 
+    - run: ls
+      shell: bash
+
+    - run: ls built_file
+      shell: bash
+
     - name: Upload built file
       uses: actions/upload-artifact@v2
       with:
