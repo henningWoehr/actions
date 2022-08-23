@@ -19,16 +19,6 @@ inputs:
     required: false
     default: 'false'
 
-  python-version:
-    description: "Version of python"
-    required: false
-    default: "3.10"
-
-  poetry-version:
-    description: "Version of poetry"
-    required: false
-    default: "1.1.14"
-
 
 runs:
   using: "composite"
@@ -41,9 +31,6 @@ runs:
     - name: Setup poetry
       id: setup-poetry
       uses: henningwoehr/actions/setup-poetry@main
-      with:
-        python-version: ${{ inputs.python-version }}
-        poetry-version: ${{ inputs.poetry-version }}
 
     - name: Generate requirements.txt
       run: poetry export --without-hashes > requirements.txt
