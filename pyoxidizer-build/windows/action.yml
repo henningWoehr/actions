@@ -96,8 +96,8 @@ runs:
 
     - name: Zip and cache 32-bit msi-installer
       run: |
-        Compress-Archive build\i686-pc-windows-msvc\release\msi_installer\*.msi -d built_file\windows_x32_msi-installer.zip
-        Compress-Archive build\i686-pc-windows-msvc\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
+        Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_x32_msi-installer.zip
+        Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
       shell: powershell
 
     - name: Upload built file
