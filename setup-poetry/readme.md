@@ -1,5 +1,5 @@
 # setup-poetry
-GitHub Actions for Python projects using poetry
+GitHub Action for Python projects using poetry
 
 ## Getting started
 
