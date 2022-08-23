@@ -37,17 +37,21 @@ runs:
   using: "composite"
   steps: 
 
-    - name: Download pyoxidizer
-      uses: suisei-cn/actions-download-file@v1.0.1
-      with:
-        url: "https://github.com/indygreg/PyOxidizer/releases/download/pyoxidizer%2F0.22.0/pyoxidizer-0.22.0-x86_64-pc-windows-msvc.zip"
-        target: pyoxidizer/
+    # - name: Download pyoxidizer
+    #   uses: suisei-cn/actions-download-file@v1.0.1
+    #   with:
+    #     url: "https://github.com/indygreg/PyOxidizer/releases/download/pyoxidizer%2F0.22.0/pyoxidizer-0.22.0-x86_64-pc-windows-msvc.zip"
+    #     target: pyoxidizer/
+
+    # - name: Install pyoxidizer
+    #   run: | 
+    #     unzip pyoxidizer\pyoxidizer-0.22.0-x86_64-pc-windows-msvc.zip -d pyoxidizer/
+    #     mv .\pyoxidizer\pyoxidizer-0.22.0-x86_64-pc-windows-msvc\pyoxidizer.exe C:\Windows\ 
+    #   shell: cmd
 
     - name: Install pyoxidizer
-      run: | 
-        unzip pyoxidizer\pyoxidizer-0.22.0-x86_64-pc-windows-msvc.zip -d pyoxidizer/
-        mv .\pyoxidizer\pyoxidizer-0.22.0-x86_64-pc-windows-msvc\pyoxidizer.exe C:\Windows\ 
-      shell: cmd
+      run: pip install pyoxidizer
+      shell: bash
 
     - id: setup-poetry
       uses: henningwoehr/actions/setup-poetry@main
