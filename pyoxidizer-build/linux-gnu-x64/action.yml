@@ -42,8 +42,8 @@ runs:
       id: setup-poetry
       uses: henningwoehr/actions/setup-poetry@main
       with:
-        python-version: inputs.python-version
-        poetry-version: inputs.poetry-version
+        python-version: ${{ inputs.python-version }}
+        poetry-version: ${{ inputs.poetry-version }}
 
     - name: Generate requirements.txt
       run: poetry export --without-hashes > requirements.txt
