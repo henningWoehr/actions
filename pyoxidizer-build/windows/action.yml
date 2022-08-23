@@ -84,25 +84,25 @@ runs:
     - run: mkdir built_file
       shell: pwsh
 
-    - run: mkdir build\test\release\msi_installer\staged_files
+    - run: mkdir build/test/release/msi_installer/staged_files
       shell: pwsh
 
-    - run: echo "" > build\test\release\msi_installer\test.msi 
+    - run: echo "" > build/test/release/msi_installer/test.msi 
       shell: pwsh
 
-    - run: echo "" > build\test\release\msi_installer\staged_files\test.exe 
+    - run: echo "" > build/test/release/msi_installer/staged_files/test.exe 
       shell: pwsh
 
-    # - run: zip built_file\windows_${{ inputs.app-architecture }}_msi-installer.zip build\*\release\msi_installer\*.msi
+    # - run: zip built_file/windows_${{ inputs.app-architecture }}_msi-installer.zip build/*/release/msi_installer/*.msi
     #   shell: pwsh
 
-    # - run: zip built_file\windows_${{ inputs.app-architecture }}_exe.zip build\*\release\msi_installer\staged_files\*.exe
+    # - run: zip built_file/windows_${{ inputs.app-architecture }}_exe.zip build/*/release/msi_installer/staged_files/*.exe
     #   shell: pwsh
 
-    - run: Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_${{ inputs.app-architecture }}_msi-installer.zip
+    - run: Compress-Archive build/*/release/msi_installer/*.msi -d built_file/windows_${{ inputs.app-architecture }}_msi-installer.zip
       shell: pwsh
 
-    - run: Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_${{ inputs.app-architecture }}_exe.zip
+    - run: Compress-Archive build/*/release/msi_installer/staged_files/*.exe -d built_file/windows_${{ inputs.app-architecture }}_exe.zip
       shell: pwsh
 
     # - name: Zip and cache 32-bit msi-installer
