@@ -3,11 +3,11 @@ description: "Build project with pyoxidizer on linux gnu x64. Code has to be che
 
 inputs:
   app-name:
-    description: ""
+    description: "The name of the app. This name can later be used in the command line to call the app"
     required: true
 
   run-command:
-    description: ""
+    description: "The command to run at the start of the app. (eg. \"from package/main import main; main()\""
     required: true
 
   artifact-name:
