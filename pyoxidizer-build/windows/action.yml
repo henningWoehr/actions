@@ -67,35 +67,27 @@ runs:
       run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
       shell: cmd
 
-    # # Windows x32
-    # - if: inputs.use-own-pyoxidizer-config == 'false' && inputs.app-architecture == 'x32'
-    #   name: Build executable with pyoxidizer
-    #   run: pyoxidizer build exe --target-triple i686-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version "1.0" --var app_author "${{ inputs.app-author }}"
-    #   shell: cmd
+    # Windows x32
+    - if: inputs.use-own-pyoxidizer-config == 'false' && inputs.app-architecture == 'x32'
+      name: Build executable with pyoxidizer
+      run: pyoxidizer build msi_installer --target-triple i686-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version "1.0" --var app_author "${{ inputs.app-author }}"
+      shell: cmd
 
-    # - if: inputs.use-own-pyoxidizer-config == 'true' && inputs.app-architecture == 'x32'
-    #   name: Build executable with pyoxidizer
-    #   run: pyoxidizer build exe --target-triple i686-pc-windows-msvc --release
-    #   shell: cmd
+    - if: inputs.use-own-pyoxidizer-config == 'true' && inputs.app-architecture == 'x32'
+      name: Build executable with pyoxidizer
+      run: pyoxidizer build msi_installer --target-triple i686-pc-windows-msvc --release
+      shell: cmd
 
-    # # Windows x64
-    # - if: inputs.use-own-pyoxidizer-config == 'false' && inputs.app-architecture == 'x64'
-    #   name: Build executable with pyoxidizer
-    #   run: pyoxidizer build msi_installer --target-triple x86_64-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name ${{ inputs.display-name }} --var app_version "1.0" --var app_author "${{ inputs.app-author }}"
-    #   shell: cmd
+    # Windows x64
+    - if: inputs.use-own-pyoxidizer-config == 'false' && inputs.app-architecture == 'x64'
+      name: Build executable with pyoxidizer
+      run: pyoxidizer build msi_installer --target-triple x86_64-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name ${{ inputs.display-name }} --var app_version "1.0" --var app_author "${{ inputs.app-author }}"
+      shell: cmd
 
-    # - if: inputs.use-own-pyoxidizer-config == 'true' && inputs.app-architecture == 'x64'
-    #   name: Build executable with pyoxidizer
-    #   run: pyoxidizer build msi_installer --target-triple x86_64-pc-windows-msvc --release
-    #   shell: cmd
-
-    - run: |
-        mkdir build\x86_64-pc-windows-msvc\release\msi_installer\staged_files
-        "test" > build\x86_64-pc-windows-msvc\release\msi_installer\test.msi
-        "test" > build\x86_64-pc-windows-msvc\release\msi_installer\staged_files\test.exe
-      shell: powershell
-
-    
+    - if: inputs.use-own-pyoxidizer-config == 'true' && inputs.app-architecture == 'x64'
+      name: Build executable with pyoxidizer
+      run: pyoxidizer build msi_installer --target-triple x86_64-pc-windows-msvc --release
+      shell: cmd
 
     - run: mkdir built_file
       shell: powershell
