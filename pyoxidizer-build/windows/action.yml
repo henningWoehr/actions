@@ -92,10 +92,10 @@ runs:
     - run: mkdir built_file
       shell: powershell
 
-    - run: Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_x32_msi-installer.zip
+    - run: Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_${{ inputs.app-architecture }}_msi-installer.zip
       shell: powershell
 
-    - run: Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
+    - run: Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_${{ inputs.app-architecture }}_exe.zip
       shell: powershell
 
     # - name: Zip and cache 32-bit msi-installer
