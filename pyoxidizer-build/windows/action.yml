@@ -89,12 +89,21 @@ runs:
       run: pyoxidizer build msi_installer --target-triple x86_64-pc-windows-msvc --release
       shell: cmd
 
-    - name: Zip and cache 32-bit msi-installer
-      run: |
-        mkdir built_file
-        Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_x32_msi-installer.zip
-        Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
-      shell: powershell
+    - run: mkdir built_file
+      shell: bash
+
+    - run: Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_x32_msi-installer.zip
+      shell: bash
+
+    - run: Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
+      shell: bash
+
+    # - name: Zip and cache 32-bit msi-installer
+    #   run: |
+    #     mkdir built_file
+    #     Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_x32_msi-installer.zip
+    #     Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
+    #   shell: powershell
 
     - run: ls
       shell: bash
