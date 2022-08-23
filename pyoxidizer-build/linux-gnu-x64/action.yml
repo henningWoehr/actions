@@ -46,7 +46,7 @@ runs:
 
     - if: inputs.use-own-pyoxidizer-config == 'false'
       name: Build executable with pyoxidizer
-      run: pyoxidizer build exe --release --var app_name ${{ inputs.app-name }} --var run_command ${{ inputs.run-command }}
+      run: pyoxidizer build exe --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}"
       shell: bash
 
     - if: inputs.use-own-pyoxidizer-config == 'true'
