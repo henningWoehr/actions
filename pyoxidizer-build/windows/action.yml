@@ -87,10 +87,10 @@ runs:
     - run: mkdir build\test\release\msi_installer\staged_files
       shell: bash
 
-    - run: echo "" > build/test/release/msi_installer/test.msi 
+    - run: echo "" > build\test\release\msi_installer\test.msi 
       shell: bash
 
-    - run: echo "" > build/test/release/msi_installer/staged_files/test.exe 
+    - run: echo "" > build\test\release\msi_installer\staged_files\test.exe 
       shell: bash
 
     - run: zip built_file\windows_${{ inputs.app-architecture }}_msi-installer.zip build\*\release\msi_installer\*.msi
@@ -99,11 +99,11 @@ runs:
     - run: zip built_file\windows_${{ inputs.app-architecture }}_exe.zip build\*\release\msi_installer\staged_files\*.exe
       shell: bash
 
-    - run: Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_${{ inputs.app-architecture }}_msi-installer.zip
-      shell: bash
+    # - run: Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_${{ inputs.app-architecture }}_msi-installer.zip
+    #   shell: bash
 
-    - run: Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_${{ inputs.app-architecture }}_exe.zip
-      shell: bash
+    # - run: Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_${{ inputs.app-architecture }}_exe.zip
+    #   shell: bash
 
     # - name: Zip and cache 32-bit msi-installer
     #   run: |
