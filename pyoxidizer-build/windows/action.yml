@@ -90,13 +90,13 @@ runs:
       shell: cmd
 
     - run: mkdir built_file
-      shell: bash
+      shell: powershell
 
     - run: Compress-Archive build\*\release\msi_installer\*.msi -d built_file\windows_x32_msi-installer.zip
-      shell: bash
+      shell: powershell
 
     - run: Compress-Archive build\*\release\msi_installer\staged_files\*.exe -d built_file\windows_x32_exe.zip
-      shell: bash
+      shell: powershell
 
     # - name: Zip and cache 32-bit msi-installer
     #   run: |
