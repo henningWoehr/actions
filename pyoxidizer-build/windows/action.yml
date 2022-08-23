@@ -49,10 +49,12 @@ runs:
         mv .\pyoxidizer\pyoxidizer-0.22.0-x86_64-pc-windows-msvc\pyoxidizer.exe C:\Windows\ 
       shell: cmd
 
+    - name: Setup poetry
+      uses: henningwoehr/actions/setup-poetry@main
 
-    # - name: Generate requirements.txt
-    #   run: poetry export --without-hashes > requirements.txt
-    #   shell: bash
+    - name: Generate requirements.txt
+      run: poetry export --without-hashes > requirements.txt
+      shell: cmd
 
     - if: inputs.app-architecture == 'None'
       run: |
