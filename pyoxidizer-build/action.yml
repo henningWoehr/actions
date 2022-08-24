@@ -70,22 +70,10 @@ runs:
         echo "::set-output name=vars::$MY_STRING"
       shell: pwsh
 
-      # $MY_STRING="--var app_name ${{ inputs.app-name }} --var run_command '${{ inputs.run-command }}' --var display_name '${{ inputs.display-name }}' --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author '${{ inputs.app-author }}'"
-
-    - name: Test output variable
-      run: echo "${{ steps.build-variables.outputs.vars }}"
-      shell: pwsh
-
     # needs variable input (exe or msi_installer) and (target-triple); maybe combine with the following step
-    # - if: inputs.use-own-pyoxidizer-config == 'false'
-    - name: Build executable with pyoxidizer ${{ steps.build-variables.outputs.vars }}
+    - name: Build executable with pyoxidizer
       run: pyoxidizer build exe --release ${{ steps.build-variables.outputs.vars }}
       shell: pwsh
-
-    # - if: inputs.use-own-pyoxidizer-config == 'true'
-    #   name: Build executable with pyoxidizer
-    #   run: pyoxidizer build exe --release
-    #   shell: pwsh
 
     # working
     - run: mkdir built_file
@@ -96,11 +84,14 @@ runs:
       run: strip ./build/*/release/exe/${{ inputs.app-name }}
       shell: pwsh
 
-    - name: zip executable
-      run: zip -j built_file/linux_gnu_x64_exe.zip ./build/x86_64-unknown-linux-gnu/release/exe/*
+    - if: inputs.target-system == 'linux_gnu_x64'
+      run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
       shell: pwsh
 
-    - run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
+    - if: inputs.target-system == 'windows_x32' || inputs.target-system == 'windows_x64'
+      run: |
+        Compress-Archive build/*/release/msi_installer/*.msi -d built_file/${{ inputs.target-system }}_msi-installer.zip
+        Compress-Archive build/*/release/msi_installer/staged_files/*.exe -d built_file/${{ inputs.target-system }}_exe.zip
       shell: pwsh
 
     # working
