@@ -37,6 +37,12 @@ runs:
   using: "composite"
   steps: 
 
+    - if: inputs.app-architecture == 'None'
+      run: |
+        echo The app-architecture must be set accordingly 
+        exit 1
+      shell: pwsh
+
     - name: Install pyoxidizer
       run: pip install pyoxidizer
       shell: pwsh
@@ -46,12 +52,6 @@ runs:
 
     - name: Generate requirements.txt
       run: poetry export --without-hashes > requirements.txt
-      shell: pwsh
-
-    - if: inputs.app-architecture == 'None'
-      run: |
-        echo The app-architecture must be set accordingly 
-        exit 1
       shell: pwsh
   
     - if: inputs.use-own-pyoxidizer-config == 'false'
