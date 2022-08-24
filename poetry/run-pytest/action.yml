@@ -20,14 +20,17 @@ runs:
   using: "composite"
 
   steps:
-        - name: Setup poetry
-          id: setup-poetry
-          uses: henningwoehr/actions/setup-poetry@main
-          with:
-            python-version: ${{ inputs.python-version }}
-            poetry-version: ${{ inputs.poetry-version }}
-            install-dependencies: true
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-        - name: Test with pytest in poetry
-          run: poetry run pytest
-          shell: bash
+    - name: Setup poetry
+      id: setup-poetry
+      uses: henningwoehr/actions/setup-poetry@main
+      with:
+        python-version: ${{ inputs.python-version }}
+        poetry-version: ${{ inputs.poetry-version }}
+        install-dependencies: true
+
+    - name: Test with pytest in poetry
+      run: poetry run pytest
+      shell: bash
