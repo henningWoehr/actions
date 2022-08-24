@@ -43,7 +43,6 @@ runs:
 
     - name: Set build targets Test
       id: build-target
-      if: inputs.target-system == 'linux_build_x64'
       run: |
         $itemType = 'Role'
         switch ( $itemType )
