@@ -1,4 +1,4 @@
-# poetry-run-tests
+# poetry/run-pytest
 GitHub Action for Python projects using poetry
 
 ## Getting started
@@ -19,7 +19,7 @@ jobs:
 
       - name: Test code
         id: test-code
-        uses: henningwoehr/actions/poetry-run-tests@main
+        uses: henningwoehr/actions/poetry/run-pytest@main
         with:
             python-version: "3.10"      # optional (default: 3.10)
             poetry-version: "1.1.14"    # optional (default: 1.1.14)
