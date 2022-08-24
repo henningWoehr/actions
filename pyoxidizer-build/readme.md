@@ -22,7 +22,7 @@ Building for mac is currently not yet supported.
 This example will build either an executable for linux (gnu) or and executable & msi-installer for windows (x32 or x64) and download it via the artifact-name.
 
 #### Notes
-- For linux: If the linux executable is build on ubuntu-22.04, the executable can't be used on lower ubuntu versions. Therefore, to be most compatible, you have to use ubuntu-20.04.
+- For linux: If the linux executable is build on ubuntu-22.04, the executable can't be used on lower ubuntu versions. Therefore, to be most compatible, you have to use ubuntu-20.04. Read more in the [pyoxidizer docs](https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer_distributing_linux.html?highlight=glibc#managing-binary-portability-on-linux)
 
 ```yml
 name: Build Linux or Windows
