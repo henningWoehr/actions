@@ -5,6 +5,8 @@ description: "Checks, if the current project-version in the pyproject.toml is al
 runs:
   using: composite
   steps:
+    - uses: actions/checkout@v2
+
     - name: Get Latest Release
       id: current
       uses: ctrlaltdev/get-releases-action@v1.1.0
