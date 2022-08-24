@@ -49,7 +49,7 @@ runs:
     # working
     - name: Setup poetry
       id: setup-poetry
-      uses: henningwoehr/actions/setup-poetry@main
+      uses: henningwoehr/actions/poetry/setup@main
 
     # working
     - name: Generate requirements.txt

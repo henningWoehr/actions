@@ -48,7 +48,7 @@ runs:
       shell: pwsh
 
     - id: setup-poetry
-      uses: henningwoehr/actions/setup-poetry@main
+      uses: henningwoehr/actions/poetry/setup@main
 
     - name: Generate requirements.txt
       run: poetry export --without-hashes > requirements.txt
