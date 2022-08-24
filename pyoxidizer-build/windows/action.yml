@@ -62,23 +62,23 @@ runs:
     # Windows x32
     - if: inputs.use-own-pyoxidizer-config == 'false' && inputs.app-architecture == 'x32'
       name: Build executable with pyoxidizer
-      run: pyoxidizer build msi_installer --target-triple i686-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author "${{ inputs.app-author }}"
+      run: pyoxidizer build exe msi_installer --target-triple i686-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author "${{ inputs.app-author }}"
       shell: pwsh
 
     - if: inputs.use-own-pyoxidizer-config == 'true' && inputs.app-architecture == 'x32'
       name: Build executable with pyoxidizer
-      run: pyoxidizer build msi_installer --target-triple i686-pc-windows-msvc --release
+      run: pyoxidizer build exe msi_installer --target-triple i686-pc-windows-msvc --release
       shell: pwsh
 
     # Windows x64
     - if: inputs.use-own-pyoxidizer-config == 'false' && inputs.app-architecture == 'x64'
       name: Build executable with pyoxidizer
-      run: pyoxidizer build msi_installer --target-triple x86_64-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author "${{ inputs.app-author }}"
+      run: pyoxidizer build exe msi_installer --target-triple x86_64-pc-windows-msvc --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author "${{ inputs.app-author }}"
       shell: pwsh
 
     - if: inputs.use-own-pyoxidizer-config == 'true' && inputs.app-architecture == 'x64'
       name: Build executable with pyoxidizer
-      run: pyoxidizer build msi_installer --target-triple x86_64-pc-windows-msvc --release
+      run: pyoxidizer build exe msi_installer --target-triple x86_64-pc-windows-msvc --release
       shell: pwsh
 
     - run: mkdir built_file
