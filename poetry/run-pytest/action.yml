@@ -1,5 +1,5 @@
-name: "Setup Python and Poetry"
-description: "Setups Python, Poetry and sets env.project_version"
+name: "Run pytest with poetry"
+description: "Sets up Python, Poetry, sets env.project_version and then runs tests via 'poetry run pytest'"
 
 inputs:
   poetry-version:
