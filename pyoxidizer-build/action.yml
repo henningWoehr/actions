@@ -68,7 +68,7 @@ runs:
       shell: pwsh
 
     - name: Test output variable
-      run: echo ${{ steps.testing-variables.outputs.test }}
+      run: echo "${{ steps.testing-variables.outputs.test }}"
       shell: pwsh
 
     # needs variable input (exe or msi_installer) and (target-triple); maybe combine with the following step
