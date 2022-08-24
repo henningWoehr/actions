@@ -11,21 +11,16 @@ inputs:
     required: true
 
   run-command:
-    description: "The command to run at the start of the app. (eg. \"from package/main import main; main()\""
+    description: "The command to run at the start of the app. (eg. \"from package.main import main; main()\""
     required: true
 
   display-name:
-    description: "The name, which appears in the name of the msi-installer and in the program files folder "
+    description: "The name, which appears in the name of the msi-installer and in the program files folder"
     required: true
 
   app-author:
-    description: "The name of the author or the manufacturer, which is displayed when installing the app"
+    description: "The name of the author or the manufacturer, which is displayed when installing the app per msi-installer"
     required: true
-
-  app-architecture:
-    description: "Defines the architecture of the windows exe. Possible inputs: [x32, x64]"
-    required: true
-    default: "None"
 
   artifact-name:
     description: "Name of the artifact, where the built file should be uploaded"
