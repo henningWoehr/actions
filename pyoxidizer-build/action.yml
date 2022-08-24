@@ -109,7 +109,7 @@ runs:
             }
             'windows_x32'
             {
-                $OUTPUT = "686-pc-windows-msvc"
+                $OUTPUT = "i686-pc-windows-msvc"
             }
             'windows_x64'
             {
