@@ -1,0 +1,36 @@
+name: "Run pytest with poetry"
+description: "Sets up Python, Poetry, and then runs tests via 'poetry run pytest'. Outputs the current project version of the pyproject.toml"
+
+inputs:
+  poetry-version:
+    description: "Version of poetry to install"
+    required: false
+    default: "1.1.14"
+  python-version:
+    description: "Version of python to install"
+    required: false
+    default: "3.10"
+
+outputs:
+  project-version:
+    description: Current project version of pyproject.toml
+    value: ${{ steps.setup-poetry.outputs.project-version }}
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup poetry
+      id: setup-poetry
+      uses: henningwoehr/actions/poetry/setup@main
+      with:
+        python-version: ${{ inputs.python-version }}
+        poetry-version: ${{ inputs.poetry-version }}
+        install-dependencies: true
+
+    - name: Lint code with flake8
+      run: poetry run flake8
+      shell: bash
