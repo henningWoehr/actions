@@ -18,7 +18,7 @@ This action will use a python poetry project and build executables/installer for
 | - | - |
 ## Examples
 ### Linux GNU x64
-This example will build an executable for linux (gnu) and download it via the artifact-name.
+This example will build an executable for linux (gnu) and download it via the artifact-name.\n
 
 Important: If the linux executable is build on ubuntu-22.04, the executable can't be used on lower ubuntu versions. Therefore, to be most compatible, you have to use ubuntu-20.04.
 
