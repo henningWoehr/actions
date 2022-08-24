@@ -17,8 +17,7 @@ Building for mac is currently not yet supported.
 | Output name | Description |
 | --- | --- |
 | - | - |
-## Examples
-### Linux GNU x64
+## Example
 This example will build either an executable for linux (gnu) or and executable & msi-installer for windows (x32 or x64) and download it via the artifact-name.
 
 #### Notes
