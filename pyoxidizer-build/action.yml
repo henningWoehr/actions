@@ -41,27 +41,6 @@ runs:
   using: "composite"
   steps:  
 
-    - name: Set build targets Test
-      id: build-target
-      run: |
-        $itemType = 'Role'
-        switch ( $itemType )
-        {
-            'Component'
-            {
-                echo 'is a component'
-            }
-            'Role'
-            {
-                echo 'is a role'
-            }
-            'Location'
-            {
-                echo 'is a location'
-            }
-        }
-      shell: pwsh
-
     # working
     - name: Install pyoxidizer
       run: pip install pyoxidizer
@@ -85,52 +64,60 @@ runs:
 
     - name: Set build variables
       id: build-variables
-      if: inputs.use-own-pyoxidizer-config == 'false'
+      # if: inputs.use-own-pyoxidizer-config == 'false'
       run: | 
-        
-        $OUTPUT="--var app_name ${{ inputs.app-name }} --var run_command '${{ inputs.run-command }}' --var display_name '${{ inputs.display-name }}' --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author '${{ inputs.app-author }}'"
+        if (${{inputs.use-own-pyoxidizer-config}} -eq 'false')
+        {
+          $OUTPUT = "--var app_name ${{ inputs.app-name }} --var run_command '${{ inputs.run-command }}' --var display_name '${{ inputs.display-name }}' --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author '${{ inputs.app-author }}'"
+        }
+        else
+        {
+          $OUTPUT = ""
+        }
         echo "::set-output name=vars::$OUTPUT"
       shell: pwsh
 
-    # - name: Set build target linux (exe)
-    #   id: build-target
-    #   if: inputs.target-system == 'linux_build_x64'
-    #   run: |
-    #     $OUTPUT="exe"
-    #     echo "::set-output name=target::$OUTPUT"
-    #   shell: pwsh
+    - name: Set build target linux (exe)
+      id: build-target
+      run: |
+        switch ('${{ inputs.target-system }}')
+        {
+            'linux_gnu_x64'
+            {
+                $OUTPUT = "exe"
+            }
+            'windows_x32'
+            {
+                $OUTPUT = "msi_installer"
+            }
+            'windows_x64'
+            {
+                $OUTPUT = "msi_installer"
+            }
+        }
+        echo "::set-output name=target::$OUTPUT"
+      shell: pwsh
 
-    # - name: Set target-triple (linux_gnu_x64)
-    #   id: target-triple
-    #   if: inputs.target-system == 'linux_build_x64'
-    #   run: |
-    #     $OUTPUT="x86_64-unknown-linux-gnu"
-    #     echo "::set-output name=target::$OUTPUT"
-    #   shell: pwsh
-
-    # - name: Set target-triple (windows_x32)
-    #   id: target-triple
-    #   if: inputs.target-system == 'windows_x32'
-    #   run: |
-    #     $OUTPUT="686-pc-windows-msvc"
-    #     echo "::set-output name=target::$OUTPUT"
-    #   shell: pwsh
-
-    # - name: Set target-triple (windows_x64)
-    #   id: target-triple
-    #   if: inputs.target-system == 'windows_x64'
-    #   run: |
-    #     $OUTPUT="x86_64-pc-windows-msvc"
-    #     echo "::set-output name=target::$OUTPUT"
-    #   shell: pwsh
-
-    # - name: Set build target linux (exe)
-    #   id: build-target
-    #   if: inputs.target-system == 'windows_x32' || inputs.target-system == 'windows_x64'
-    #   run: |
-    #     $OUTPUT="msi_installer"
-    #     echo "::set-output name=target::$OUTPUT"
-    #   shell: pwsh
+    - name: Set target-triple (linux_gnu_x64)
+      id: target-triple
+      run: |
+        switch ('${{ inputs.target-system }}')
+        {
+            'linux_gnu_x64'
+            {
+                $OUTPUT = "x86_64-unknown-linux-gnu"
+            }
+            'windows_x32'
+            {
+                $OUTPUT = "686-pc-windows-msvc"
+            }
+            'windows_x64'
+            {
+                $OUTPUT = "x86_64-pc-windows-msvc"
+            }
+        }
+        echo "::set-output name=target::$OUTPUT"
+      shell: pwsh
 
     # needs variable input (exe or msi_installer) and (target-triple); maybe combine with the following step
     - name: Build executable with pyoxidizer
