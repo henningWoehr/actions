@@ -1,6 +1,10 @@
 name: "check-version"
 description: "Checks, if the current project-version in the pyproject.toml is already existing as a tag. Fails, if that tag already exists"
 
+inputs:
+  token:
+    description: "Github Token"
+    required: true
 
 runs:
   using: composite
@@ -12,7 +16,7 @@ runs:
       uses: ctrlaltdev/get-releases-action@v1.1.0
       with:
         repo: ${{ github.repository }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ inputs.token }}
         limit: 1    
 
     - name: Setup poetry
