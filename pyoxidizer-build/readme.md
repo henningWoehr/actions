@@ -49,7 +49,7 @@ jobs:
         run-command: "from package.main import main; main()"
         artifact-name: example_artifact
         display-name: "Example App"
-        app-author: "Your Name"
+        app-author: "Your Name / Your Organization"
 
   download_files:
     runs-on: ubuntu-latest
