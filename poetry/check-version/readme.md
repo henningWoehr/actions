@@ -1,4 +1,7 @@
 # poetry/check-version
+GitHub Action for Python projects using poetry
+
+## Description
 This action compares the current project version with the latest tag of the repository. Fails if the project version isn't newer than the newest tag.
 
 ## Action Inputs
@@ -12,7 +15,6 @@ This action compares the current project version with the latest tag of the repo
 | - | - |
 
 ## Example
-This example will compare your project version with the newest tag.
 
 #### Notes
 - No code checkout is needed
