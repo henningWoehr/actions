@@ -1,4 +1,4 @@
-# pyoxidizer-build
+# poetry/check-version
 This action compares the current project version with the latest tag of the repository. Fails if the project version isn't newer than the newest tag.
 
 ## Action Inputs
