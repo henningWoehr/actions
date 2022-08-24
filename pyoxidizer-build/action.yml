@@ -62,19 +62,20 @@ runs:
       run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
       shell: pwsh
 
-    - name: Set output variable
-      id: testing-variables
-      run: echo "::set-output name=test::test"
+    - name: Set build variables
+      id: build-variables
+      if: inputs.use-own-pyoxidizer-config == 'false'
+      run: echo "::set-output name=vars::--var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author "${{ inputs.app-author }}""
       shell: pwsh
 
     - name: Test output variable
-      run: echo "${{ steps.testing-variables.outputs.test }}"
+      run: echo "${{ steps.build-variables.outputs.test }}"
       shell: pwsh
 
     # needs variable input (exe or msi_installer) and (target-triple); maybe combine with the following step
     - if: inputs.use-own-pyoxidizer-config == 'false'
       name: Build executable with pyoxidizer
-      run: pyoxidizer build exe --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}" --var display_name "${{ inputs.display-name }}" --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author "${{ inputs.app-author }}"
+      run: pyoxidizer build exe --release 
       shell: pwsh
 
     - if: inputs.use-own-pyoxidizer-config == 'true'
