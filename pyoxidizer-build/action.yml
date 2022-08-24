@@ -36,22 +36,18 @@ runs:
   using: "composite"
   steps:  
 
-    # working
     - name: Install pyoxidizer
       run: pip install pyoxidizer
       shell: pwsh
 
-    # working
     - name: Setup poetry
       id: setup-poetry
       uses: henningwoehr/actions/poetry/setup@main
 
-    # working
     - name: Generate requirements.txt
       run: poetry export --without-hashes > requirements.txt
       shell: pwsh
 
-    # working
     - if: inputs.use-own-pyoxidizer-config == 'false'
       name: Get pyoxidizer build file
       run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
@@ -59,7 +55,6 @@ runs:
 
     - name: Set build variables
       id: build-variables
-      # if: inputs.use-own-pyoxidizer-config == 'false'
       run: | 
         if ('${{inputs.use-own-pyoxidizer-config}}' -eq 'false')
         {
@@ -114,19 +109,12 @@ runs:
         echo "::set-output name=target::$OUTPUT"
       shell: pwsh
 
-    # needs variable input (exe or msi_installer) and (target-triple); maybe combine with the following step
     - name: Build executable with pyoxidizer
       run: pyoxidizer build ${{ steps.build-target.outputs.target }} --target-triple ${{ steps.target-triple.outputs.target }} --release ${{ steps.build-variables.outputs.vars }}
       shell: pwsh
 
-    # working
     - run: mkdir built_file
       shell: pwsh
-
-    # # working
-    # - if: inputs.target-system == 'linux_gnu_x64'
-    #   run: strip ./build/*/release/exe/${{ inputs.app-name }}
-    #   shell: pwsh
 
     - if: inputs.target-system == 'linux_gnu_x64'
       run: |
@@ -140,7 +128,6 @@ runs:
         Compress-Archive build/*/release/msi_installer/staged_files/*.exe -d built_file/${{ inputs.target-system }}_exe.zip
       shell: pwsh
 
-    # working
     - name: Upload built file
       uses: actions/upload-artifact@v2
       with:
