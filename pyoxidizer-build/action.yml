@@ -64,7 +64,7 @@ runs:
 
     - name: Set output variable
       id: testing-variables
-      run: echo "::set-output name=test::"test""
+      run: echo "::set-output name=test::test"
       shell: pwsh
 
     - name: Test output variable
