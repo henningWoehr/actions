@@ -1,4 +1,7 @@
 # pyoxidizer-build
+GitHub Action for python projects using poetry
+
+## Description
 This action will use a python poetry project and build executables/installer for either linux or windows.
 Building for mac is currently not yet supported.
 
