@@ -13,12 +13,13 @@ This action will use a python poetry project and build executables/installer for
 | use-own-pyoxidizer-config | Use own pyoxidizer.bzl, given in the project folder if true, otherwise use standard config provided by this action | false | false |
 
 ## Action Outputs
-| Output name | Description                                   |
-|-------------|-----------------------------------------------|
-| -           | The identifier of the created release.        |
+| Output name | Description |
+| --- | --- |
+| - | - |
 ## Examples
 ### Linux GNU x64
 This example will build an executable for linux (gnu) and download it via the artifact-name.
+
 Important: If the linux executable is build on ubuntu-22.04, the executable can't be used on lower ubuntu versions. Therefore, to be most compatible, you have to use ubuntu-20.04.
 
 ```yml
