@@ -65,7 +65,9 @@ runs:
     - name: Set build variables
       id: build-variables
       if: inputs.use-own-pyoxidizer-config == 'false'
-      run: echo "::set-output name=vars::(echo "--var app_name ${{ inputs.app-name }} --var run_command '${{ inputs.run-command }}' --var display_name '${{ inputs.display-name }}' --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author '${{ inputs.app-author }}'")"
+      run: | 
+        $MY_STRING="--var app_name ${{ inputs.app-name }} --var run_command '${{ inputs.run-command }}' --var display_name '${{ inputs.display-name }}' --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author '${{ inputs.app-author }}'"
+        echo "::set-output name=vars::$MY_STRING"
       shell: pwsh
 
     - name: Test output variable
