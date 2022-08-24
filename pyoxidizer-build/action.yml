@@ -42,25 +42,25 @@ runs:
   steps:  
 
     # working
-    # - name: Install pyoxidizer
-    #   run: pip install pyoxidizer
-    #   shell: pwsh
+    - name: Install pyoxidizer
+      run: pip install pyoxidizer
+      shell: pwsh
 
-    # # working
-    # - name: Setup poetry
-    #   id: setup-poetry
-    #   uses: henningwoehr/actions/setup-poetry@main
+    # working
+    - name: Setup poetry
+      id: setup-poetry
+      uses: henningwoehr/actions/setup-poetry@main
 
-    # # working
-    # - name: Generate requirements.txt
-    #   run: poetry export --without-hashes > requirements.txt
-    #   shell: pwsh
+    # working
+    - name: Generate requirements.txt
+      run: poetry export --without-hashes > requirements.txt
+      shell: pwsh
 
-    # # working
-    # - if: inputs.use-own-pyoxidizer-config == 'false'
-    #   name: Get pyoxidizer build file
-    #   run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
-    #   shell: pwsh
+    # working
+    - if: inputs.use-own-pyoxidizer-config == 'false'
+      name: Get pyoxidizer build file
+      run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
+      shell: pwsh
 
     - name: Set build variables
       id: build-variables
@@ -78,34 +78,34 @@ runs:
 
     # needs variable input (exe or msi_installer) and (target-triple); maybe combine with the following step
     # - if: inputs.use-own-pyoxidizer-config == 'false'
-    # - name: Build executable with pyoxidizer ${{ steps.build-variables.outputs.vars }}
-    #   run: pyoxidizer build exe --release 
+    - name: Build executable with pyoxidizer ${{ steps.build-variables.outputs.vars }}
+      run: pyoxidizer build exe --release 
+      shell: pwsh
+
+    # - if: inputs.use-own-pyoxidizer-config == 'true'
+    #   name: Build executable with pyoxidizer
+    #   run: pyoxidizer build exe --release
     #   shell: pwsh
 
-    # # - if: inputs.use-own-pyoxidizer-config == 'true'
-    # #   name: Build executable with pyoxidizer
-    # #   run: pyoxidizer build exe --release
-    # #   shell: pwsh
+    # working
+    - run: mkdir built_file
+      shell: pwsh
 
-    # # working
-    # - run: mkdir built_file
-    #   shell: pwsh
+    # working
+    - if: inputs.target-system == 'linux_gnu_x64'
+      run: strip ./build/*/release/exe/${{ inputs.app-name }}
+      shell: pwsh
 
-    # # working
-    # - if: inputs.target-system == 'linux_gnu_x64'
-    #   run: strip ./build/*/release/exe/${{ inputs.app-name }}
-    #   shell: pwsh
+    - name: zip executable
+      run: zip -j built_file/linux_gnu_x64_exe.zip ./build/x86_64-unknown-linux-gnu/release/exe/*
+      shell: pwsh
 
-    # - name: zip executable
-    #   run: zip -j built_file/linux_gnu_x64_exe.zip ./build/x86_64-unknown-linux-gnu/release/exe/*
-    #   shell: pwsh
+    - run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
+      shell: pwsh
 
-    # - run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
-    #   shell: pwsh
-
-    # # working
-    # - name: Upload built file
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: ${{ inputs.artifact-name }}
-    #     path: built_file/
+    # working
+    - name: Upload built file
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: built_file/
