@@ -1,5 +1,5 @@
 # poetry/run-pytest
-GitHub Action for Python projects using poetry
+GitHub Action for python projects using poetry
 
 ## Description
 With this action you can easily test your code using poetry and pytest with the right dependencies based of the pyproject.toml
@@ -36,4 +36,10 @@ jobs:
       - name: Test code
         id: test-code
         uses: henningwoehr/actions/poetry/run-pytest@main
+        with:
+          python-version: "3.10"
+          poetry-version: "1.1.14"
+
+      - name: Project Version
+        run: echo ${{ steps.setup-poetry.outputs.project-version }}
 ```
