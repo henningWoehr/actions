@@ -30,7 +30,7 @@ on:
 
 jobs:
   run_tests_poetry:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Test code

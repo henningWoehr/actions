@@ -30,16 +30,9 @@ on:
 
 jobs:
   lint_flake8:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Test code
-        id: test-code
         uses: henningwoehr/actions/poetry/lint-flake8@main
-        with:
-          python-version: "3.10"
-          poetry-version: "1.1.14"
-
-      - name: Project Version
-        run: echo ${{ steps.setup-poetry.outputs.project-version }}
 ```
