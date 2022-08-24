@@ -51,21 +51,21 @@ runs:
       run: pyoxidizer build exe --release
       shell: bash
 
-    - run: mkdir built_file
-      shell: bash
-
-    - run: strip ./build/x86_64-unknown-linux-gnu/release/exe/${{ inputs.app-name }}
-      shell: bash
-
-    # - name: Strip and zip executable
-    #   run: |
-    #     strip ./build/x86_64-unknown-linux-gnu/release/exe/${{ inputs.app-name }}
-    #     mkdir built_file
-    #     zip -j built_file/linux_gnu_x64_exe.zip ./build/x86_64-unknown-linux-gnu/release/exe/*
+    # - run: mkdir built_file
     #   shell: bash
 
-    - run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
+    # - run: strip ./build/x86_64-unknown-linux-gnu/release/exe/${{ inputs.app-name }}
+    #   shell: bash
+
+    - name: Strip and zip executable
+      run: |
+        strip ./build/x86_64-unknown-linux-gnu/release/exe/${{ inputs.app-name }}
+        mkdir built_file
+        zip -j built_file/linux_gnu_x64_exe.zip ./build/x86_64-unknown-linux-gnu/release/exe/*
       shell: bash
+
+    # - run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
+    #   shell: bash
 
     - name: Upload built file
       uses: actions/upload-artifact@v2
