@@ -5,6 +5,9 @@ inputs:
   token:
     description: "Github Token"
     required: true
+  repo:
+    description: "Current repo"
+    required: true
 
 runs:
   using: composite
@@ -15,9 +18,9 @@ runs:
       id: current
       uses: ctrlaltdev/get-releases-action@v1.1.0
       with:
-        repo: ${{ github.repository }}
+        repo: ${{ inputs.repo }}
         token: ${{ inputs.token }}
-        limit: 1    
+        limit: 1 
 
     - name: Setup poetry
       id: setup-poetry
