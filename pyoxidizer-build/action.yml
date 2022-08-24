@@ -66,8 +66,24 @@ runs:
       id: build-variables
       if: inputs.use-own-pyoxidizer-config == 'false'
       run: | 
-        $MY_STRING="--var app_name ${{ inputs.app-name }} --var run_command '${{ inputs.run-command }}' --var display_name '${{ inputs.display-name }}' --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author '${{ inputs.app-author }}'"
-        echo "::set-output name=vars::$MY_STRING"
+        $OUTPUT="--var app_name ${{ inputs.app-name }} --var run_command '${{ inputs.run-command }}' --var display_name '${{ inputs.display-name }}' --var app_version ${{ steps.setup-poetry.outputs.project-version }} --var app_author '${{ inputs.app-author }}'"
+        echo "::set-output name=vars::$OUTPUT"
+      shell: pwsh
+
+    - name: Set build target linux (exe)
+      id: build-target
+      if: inputs.target-system == 'linux_build_x64'
+      run: |
+        $OUTPUT="exe"
+        echo "::set-output name=target::$OUTPUT"
+      shell: pwsh
+
+    - name: Set build target linux (exe)
+      id: build-target
+      if: inputs.target-system == 'windows_x32' || inputs.target-system == 'windows_x64'
+      run: |
+        $OUTPUT="msi_installer"
+        echo "::set-output name=target::$OUTPUT"
       shell: pwsh
 
     # needs variable input (exe or msi_installer) and (target-triple); maybe combine with the following step
@@ -79,13 +95,15 @@ runs:
     - run: mkdir built_file
       shell: pwsh
 
-    # working
-    - if: inputs.target-system == 'linux_gnu_x64'
-      run: strip ./build/*/release/exe/${{ inputs.app-name }}
-      shell: pwsh
+    # # working
+    # - if: inputs.target-system == 'linux_gnu_x64'
+    #   run: strip ./build/*/release/exe/${{ inputs.app-name }}
+    #   shell: pwsh
 
     - if: inputs.target-system == 'linux_gnu_x64'
-      run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
+      run: |
+        strip ./build/*/release/exe/${{ inputs.app-name }}
+        Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
       shell: pwsh
 
     - if: inputs.target-system == 'windows_x32' || inputs.target-system == 'windows_x64'
