@@ -26,7 +26,7 @@ runs:
 
     - name: Install pyoxidizer
       run: pip install pyoxidizer
-      shell: pwsh
+      shell: bash
 
     - name: Setup poetry
       id: setup-poetry
@@ -34,38 +34,38 @@ runs:
 
     - name: Generate requirements.txt
       run: poetry export --without-hashes > requirements.txt
-      shell: pwsh
+      shell: bash
 
     - if: inputs.use-own-pyoxidizer-config == 'false'
       name: Get pyoxidizer build file
       run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
-      shell: pwsh
+      shell: bash
 
     - if: inputs.use-own-pyoxidizer-config == 'false'
       name: Build executable with pyoxidizer
       run: pyoxidizer build exe --release --var app_name ${{ inputs.app-name }} --var run_command "${{ inputs.run-command }}"
-      shell: pwsh
+      shell: bash
 
     - if: inputs.use-own-pyoxidizer-config == 'true'
       name: Build executable with pyoxidizer
       run: pyoxidizer build exe --release
-      shell: pwsh
+      shell: bash
 
     - run: mkdir built_file
-      shell: pwsh
+      shell: bash
 
     - run: strip ./build/x86_64-unknown-linux-gnu/release/exe/${{ inputs.app-name }}
-      shell: pwsh
+      shell: bash
 
     # - name: Strip and zip executable
     #   run: |
     #     strip ./build/x86_64-unknown-linux-gnu/release/exe/${{ inputs.app-name }}
     #     mkdir built_file
     #     zip -j built_file/linux_gnu_x64_exe.zip ./build/x86_64-unknown-linux-gnu/release/exe/*
-    #   shell: pwsh
+    #   shell: bash
 
     - run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
-      shell: pwsh
+      shell: bash
 
     - name: Upload built file
       uses: actions/upload-artifact@v2
