@@ -25,7 +25,7 @@ runs:
 
     - name: Setup poetry
       id: setup-poetry
-      uses: henningwoehr/actions/setup-poetry@main
+      uses: henningwoehr/actions/poetry/setup@main
       with:
         python-version: ${{ inputs.python-version }}
         poetry-version: ${{ inputs.poetry-version }}
