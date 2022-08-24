@@ -1,5 +1,5 @@
 name: "Setup Python and Poetry"
-description: "Setups Python, Poetry and sets env.project_version"
+description: "Sets up Python, Poetry and optionally installs the dependencies. Outputs the current project version of the pyproject.toml"
 
 inputs:
   poetry-version:
@@ -11,7 +11,7 @@ inputs:
     required: false
     default: "3.10"
   install-dependencies:
-    description: "Install project dependencies if true"
+    description: "Install project dependencies"
     required: false
     default: 'false'
 

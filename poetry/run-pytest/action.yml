@@ -1,5 +1,5 @@
 name: "Run pytest with poetry"
-description: "Sets up Python, Poetry, sets env.project_version and then runs tests via 'poetry run pytest'"
+description: "Sets up Python, Poetry, and then runs tests via 'poetry run pytest'. Outputs the current project version of the pyproject.toml"
 
 inputs:
   poetry-version:

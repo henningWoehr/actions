@@ -3,13 +3,14 @@ description: "Checks, if the current project-version in the pyproject.toml is al
 
 inputs:
   token:
-    description: "Github Token"
+    description: "Github token to make authed request to GH API"
     required: true
 
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Get Latest Release
       id: current
