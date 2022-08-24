@@ -25,7 +25,7 @@ This example will build either an executable for linux (gnu) or and executable &
 - For linux: If the linux executable is build on ubuntu-22.04, the executable can't be used on lower ubuntu versions. Therefore, to be most compatible, you have to use ubuntu-20.04.
 
 ```yml
-name: Build Linux GNU x64
+name: Build Linux or Windows
 
 on: 
   push:
