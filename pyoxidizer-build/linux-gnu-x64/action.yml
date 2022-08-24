@@ -64,7 +64,7 @@ runs:
     #     zip -j built_file/linux_gnu_x64_exe.zip ./build/x86_64-unknown-linux-gnu/release/exe/*
     #   shell: pwsh
 
-    - run: Compress-Archive build/*/release/exe/*.exe -d built_file/linux_gnu_x64_exe.zip
+    - run: Compress-Archive build/*/release/exe/${{ inputs.app-name }} -d built_file/linux_gnu_x64_exe.zip
       shell: pwsh
 
     - name: Upload built file
