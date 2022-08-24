@@ -11,9 +11,7 @@ runs:
       with:
         repo: ${{ github.repository }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        limit: 1
-
-    - uses: actions/checkout@v2
+        limit: 1    
 
     - name: Setup poetry
       id: setup-poetry
