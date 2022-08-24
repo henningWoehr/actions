@@ -42,25 +42,25 @@ runs:
   steps:  
 
     # working
-    - name: Install pyoxidizer
-      run: pip install pyoxidizer
-      shell: pwsh
+    # - name: Install pyoxidizer
+    #   run: pip install pyoxidizer
+    #   shell: pwsh
 
-    # working
-    - name: Setup poetry
-      id: setup-poetry
-      uses: henningwoehr/actions/setup-poetry@main
+    # # working
+    # - name: Setup poetry
+    #   id: setup-poetry
+    #   uses: henningwoehr/actions/setup-poetry@main
 
-    # working
-    - name: Generate requirements.txt
-      run: poetry export --without-hashes > requirements.txt
-      shell: pwsh
+    # # working
+    # - name: Generate requirements.txt
+    #   run: poetry export --without-hashes > requirements.txt
+    #   shell: pwsh
 
-    # working
-    - if: inputs.use-own-pyoxidizer-config == 'false'
-      name: Get pyoxidizer build file
-      run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
-      shell: pwsh
+    # # working
+    # - if: inputs.use-own-pyoxidizer-config == 'false'
+    #   name: Get pyoxidizer build file
+    #   run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
+    #   shell: pwsh
 
     - name: Set build variables
       id: build-variables
