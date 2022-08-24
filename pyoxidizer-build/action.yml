@@ -50,15 +50,15 @@ runs:
         {
             'Component'
             {
-                'is a component'
+                echo 'is a component'
             }
             'Role'
             {
-                'is a role'
+                echo 'is a role'
             }
             'Location'
             {
-                'is a location'
+                echo 'is a location'
             }
         }
       shell: pwsh
