@@ -20,9 +20,9 @@ runs:
         token: ${{ inputs.token }}
         limit: 1 
 
-    - name: 'Get Previous tag'
-      id: previoustag
-      uses: "WyriHaximus/github-action-get-previous-tag@v1"
+    - uses: actions-ecosystem/action-get-latest-tag@v1
+      id: get-latest-tag
+      if: ${{ steps.release-label.outputs.level != null }}
 
     - name: Setup poetry
       id: setup-poetry
@@ -33,7 +33,7 @@ runs:
         echo "RELEASE_OLD=$(echo $json_var | jq '.[].tag_name' | tr -d '"')" >> $GITHUB_ENV
         echo "POETRY_NEW=$(poetry version --short)" >> $GITHUB_ENV
       env:
-        json_var: ${{ steps.previoustag.outputs.tag }}
+        json_var: ${{ steps.get-latest-tag.outputs.tag }}
       shell: bash
 
     - name: validate version
