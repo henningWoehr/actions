@@ -34,6 +34,13 @@ on:
     branches:
     - master
 
+env:
+  APP_NAME: example_app
+  RUN_COMMAND: "from package.main import main; main()"
+  DISPLAY_NAME: "Example App"
+  APP_AUTHOR: "Your Name / Your Organization"
+  ARTIFACT_NAME: example_artifact
+
 jobs:
 
   build:
@@ -47,11 +54,11 @@ jobs:
       uses: henningwoehr/actions/pyoxidizer-build@main
       with:
         target-system: linux_gnu_x64        # windows_x32 or windows_x64
-        app-name: example_app
-        run-command: "from package.main import main; main()"
-        artifact-name: example_artifact
-        display-name: "Example App"
-        app-author: "Your Name / Your Organization"
+        app-name: ${{ env.APP_NAME }}
+        run-command: ${{ env.RUN_COMMAND }}
+        artifact-name: ${{ env.ARTIFACT_NAME }}
+        display-name: ${{ env.DISPLAY_NAME }}
+        app-author: ${{ env.APP_AUTHOR }}
 
   download_files:
     runs-on: ubuntu-latest
@@ -61,7 +68,7 @@ jobs:
       - name: Download files
         uses: actions/download-artifact@v2
         with:
-          name: example_artifact
+          name: ${{ env.ARTIFACT_NAME }}
           path: built_files
 
       - name: List files
