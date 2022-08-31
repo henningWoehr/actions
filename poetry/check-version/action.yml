@@ -24,6 +24,9 @@ runs:
       id: get-latest-tag
       if: ${{ steps.release-label.outputs.level != null }}
 
+    - run: echo ${{ steps.get-latest-tag.outputs.tag }}
+      shell: bash
+
     - name: Setup poetry
       id: setup-poetry
       uses: henningwoehr/actions/poetry/setup@main
