@@ -31,8 +31,8 @@ name: Build Linux or Windows
 
 on: 
   push:
-    tags:
-    - '*'
+    branches:
+    - master
 
 jobs:
 
