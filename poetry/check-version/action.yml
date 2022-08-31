@@ -20,6 +20,10 @@ runs:
         token: ${{ inputs.token }}
         limit: 1 
 
+    - name: 'Get Previous tag'
+      id: previoustag
+      uses: "WyriHaximus/github-action-get-previous-tag@v1"
+
     - name: Setup poetry
       id: setup-poetry
       uses: henningwoehr/actions/poetry/setup@main
@@ -29,7 +33,7 @@ runs:
         echo "RELEASE_OLD=$(echo $json_var | jq '.[].tag_name' | tr -d '"')" >> $GITHUB_ENV
         echo "POETRY_NEW=$(poetry version --short)" >> $GITHUB_ENV
       env:
-        json_var: ${{ steps.current.outputs.releases }}
+        json_var: ${{ steps.previoustag.outputs.tag }}
       shell: bash
 
     - name: validate version
