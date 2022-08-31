@@ -33,6 +33,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test code
+      - name: Lint code
         uses: henningwoehr/actions/poetry/lint-flake8@main
 ```
