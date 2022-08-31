@@ -35,7 +35,7 @@ jobs:
 
       - name: Setup poetry
           id: setup-poetry
-          uses: henningwoehr/actions/setup-poetry@main
+          uses: henningwoehr/actions/poetry/setup@main
           with:
             python-version: "3.10"
             poetry-version: "1.1.14"
