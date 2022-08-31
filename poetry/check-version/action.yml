@@ -29,11 +29,9 @@ runs:
       uses: henningwoehr/actions/poetry/setup@main
 
     - name: Set env
-      run: |
-        echo "RELEASE_OLD=$(echo $json_var | jq '.[].tag_name' | tr -d '"')" >> $GITHUB_ENV
+      run: |  # echo "RELEASE_OLD=$(echo $json_var | jq '.[].tag_name' | tr -d '"')" >> $GITHUB_ENV
+        echo "POETRY_NEW=${{ steps.get-latest-tag.outputs.tag }}" >> $GITHUB_ENV
         echo "POETRY_NEW=$(poetry version --short)" >> $GITHUB_ENV
-      env:
-        json_var: ${{ steps.get-latest-tag.outputs.tag }}
       shell: bash
 
     - name: validate version
