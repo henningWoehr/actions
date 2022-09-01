@@ -61,6 +61,8 @@ jobs:
         artifact-name: ${{ env.ARTIFACT_NAME }}
         display-name: ${{ env.DISPLAY_NAME }}
         app-author: ${{ env.APP_AUTHOR }}
+        python-version: "3.10"
+        poetry-version: "1.1.14"
 
   download_files:
     runs-on: ubuntu-latest
