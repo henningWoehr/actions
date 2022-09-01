@@ -57,10 +57,6 @@ runs:
         python-version: ${{ inputs.python-version }}
         poetry-version: ${{ inputs.poetry-version }}
 
-    - name: Generate requirements.txt
-      run: poetry export --without-hashes > requirements.txt
-      shell: pwsh
-
     - if: inputs.use-own-pyoxidizer-config == 'false'
       name: Get pyoxidizer build file
       run: curl https://raw.githubusercontent.com/henningWoehr/actions/main/pyoxidizer-build/pyoxidizer.bzl > pyoxidizer.bzl
