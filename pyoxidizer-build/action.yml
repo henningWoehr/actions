@@ -31,6 +31,16 @@ inputs:
     required: false
     default: 'false'
 
+  poetry-version:
+    description: "Version of poetry to install"
+    required: false
+    default: "1.1.14"
+
+  python-version:
+    description: "Version of python to install"
+    required: false
+    default: "3.10"
+
 
 runs:
   using: "composite"
@@ -43,6 +53,9 @@ runs:
     - name: Setup poetry
       id: setup-poetry
       uses: henningwoehr/actions/poetry/setup@main
+      with:
+        python-version: ${{ inputs.python-version }}
+        poetry-version: ${{ inputs.poetry-version }}
 
     - name: Generate requirements.txt
       run: poetry export --without-hashes > requirements.txt

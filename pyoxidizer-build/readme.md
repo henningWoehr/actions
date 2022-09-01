@@ -15,6 +15,8 @@ Building for mac is currently not yet supported.
 | app-author | The name of the author or the manufacturer, which is displayed when installing the app per msi-installer | true | None |
 | artifact-name | Name of the artifact, where the built file should be uploaded | true | None |
 | use-own-pyoxidizer-config | Use own pyoxidizer.bzl, given in the project folder if true, otherwise use standard config provided by this action | false | false |
+| python-version | Version of python to install | false | "3.10" |
+| poetry-version | Version of poetry to install | false | "1.1.14" |
 
 ## Action Outputs
 | Output name | Description |
