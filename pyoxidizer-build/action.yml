@@ -134,7 +134,6 @@ runs:
     - if: inputs.target-system == 'windows_x32' || inputs.target-system == 'windows_x64'
       run: |
         Compress-Archive build/*/release/msi_installer/*.msi -d built_file/${{ inputs.target-system }}_msi-installer.zip
-        Compress-Archive build/*/release/msi_installer/staged_files/*.exe -d built_file/${{ inputs.target-system }}_exe.zip
       shell: pwsh
 
     - name: Upload built file
