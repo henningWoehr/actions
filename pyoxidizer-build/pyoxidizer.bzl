@@ -94,7 +94,7 @@ def make_exe():
 
     # Attempt to add resources relative to the built binary when
     # `resources_location` fails.
-    policy.resources_location_fallback = "filesystem-relative:prefix"
+    # policy.resources_location_fallback = "filesystem-relative:prefix"
 
     # Clear out a fallback resource location.
     # policy.resources_location_fallback = None
