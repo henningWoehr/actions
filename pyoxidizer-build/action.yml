@@ -141,3 +141,4 @@ runs:
       with:
         name: ${{ inputs.artifact-name }}
         path: built_file/
+        retention-days: 1
